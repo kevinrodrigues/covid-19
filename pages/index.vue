@@ -1,51 +1,71 @@
 <template>
   <div class="container">
     <div>
-      <logo />
+      <VirusIcon />
       <h1 class="title">
-        covid-19-visualizer
-      </h1>
-      <h2 class="subtitle">
         Covid-19 Visualizer
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+      </h1>
+      <div class="container is-fullhd">
+        graph here.
+      </div>
+      <a href="https://github.com/kevinrodrigues" target="_blank" class="git button">
+        <span class="icon is-small">
+          <OctocatIcon />
+        </span>
+      </a>
+      <div class="columns links">
+        <div class="column">
+          <a
+            href="https://www.nhs.uk/conditions/coronavirus-covid-19/"
+            target="_blank"
+            class="button is-link"
+          >
+            Coronavirus - NHS
+          </a>
+        </div>
+
+        <div class="column">
+          <a
+            href="https://www.gov.uk/coronavirus"
+            target="_blank"
+            class="button is-warning"
+          >
+            Coronavirus - Gov.uk
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import VirusIcon from '~/components/VirusIcon.vue';
+import OctocatIcon from '~/components/GithubOctocat.vue';
 
 export default {
   components: {
-    Logo
+    VirusIcon,
+    OctocatIcon
   }
-}
+};
 </script>
 
 <style>
+body {
+  background-color: #090c1f;
+}
+
+body,
+html {
+  height: 100%;
+}
 .container {
   margin: 0 auto;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 30px 0;
 }
 
 .title {
@@ -53,9 +73,10 @@ export default {
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   display: block;
   font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
+  font-size: 24px;
+  color: #fff;
   letter-spacing: 1px;
+  margin-top: 10px;
 }
 
 .subtitle {
@@ -68,5 +89,16 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.links a:first-child {
+  margin-right: 20px;
+}
+
+.git {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 10px;;
 }
 </style>
