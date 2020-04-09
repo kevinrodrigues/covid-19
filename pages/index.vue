@@ -3,13 +3,14 @@
     <div>
       <VirusIcon />
       <h1 class="title">
+        <WorldIcon class="world" />
         Covid-19 Visualizer
       </h1>
       <div class="container is-fullhd">
         <div class="visualizer-info">
           <div class="columns">
             <div class="column">
-              <TickIcon />
+              <WarningIcon />
               <p class="has-text-warning">Reported Infection Cases</p>
               <p class="stats has-text-warning">100</p>
             </div>
@@ -19,13 +20,13 @@
               <p class="stats has-text-success">100</p>
             </div>
             <div class="column">
+              <AlertIcon />
               <p class="has-text-danger">Death Rate %</p>
               <p class="stats has-text-danger">100%</p>
             </div>
             <div class="column">
-              <select id="select" class="form-control basic">
-                <option value="one">one</option>
-                <option value="one">two</option>
+              <select>
+                <option v-for="country in covidCountries" v-bind:key="country.id" :value="country">{{ country }}</option>
               </select>
             </div>
           </div>
@@ -62,15 +63,36 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 import VirusIcon from '~/components/VirusIcon.vue';
 import OctocatIcon from '~/components/GithubOctocat.vue';
 import TickIcon from '~/components/TickIcon.vue';
+import WarningIcon from '~/components/WarningIcon.vue';
+import AlertIcon from '~/components/AlertIcon.vue';
+import WorldIcon from '~/components/WorldIcon.vue';
 
 export default {
   components: {
     VirusIcon,
     OctocatIcon,
-    TickIcon
+    TickIcon,
+    WarningIcon,
+    AlertIcon,
+    WorldIcon
+  },
+
+  mounted () {
+    this.getCovidData();
+  },
+
+  computed: {
+    ...mapState(['covidCountries'])
+  },
+
+  methods: {
+    ...mapActions([
+      'getCovidData'
+    ])
   }
 };
 </script>
@@ -150,5 +172,12 @@ html {
 
 .visualizer-info {
   color: #fff;
+}
+
+.world {
+  margin-top: -4px;
+  width: 25px;
+  display: inline-block;
+  vertical-align: middle;
 }
 </style>
