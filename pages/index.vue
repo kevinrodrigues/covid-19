@@ -8,26 +8,26 @@
       </h1>
       <div class="container is-fullhd">
         <div class="visualizer-info">
+          <select>
+            <option v-for="country in covidCountries" v-bind:key="country.id" :value="country" :selected="country === 'United Kingdom'">
+              {{ country }}
+            </option>
+          </select>
           <div class="columns">
-            <div class="column">
+            <div class="column highlight">
               <WarningIcon />
               <p class="has-text-warning">Reported Infection Cases</p>
-              <p class="stats has-text-warning">100</p>
+              <p class="stats has-text-warning">{{ confirmed }}</p>
             </div>
-            <div class="column">
+            <div class="column highlight">
               <TickIcon />
               <p class="has-text-success">No. of people Recovered</p>
-              <p class="stats has-text-success">100</p>
+              <p class="stats has-text-success">{{ recovered }}</p>
             </div>
-            <div class="column">
+            <div class="column highlight">
               <AlertIcon />
-              <p class="has-text-danger">Death Rate %</p>
-              <p class="stats has-text-danger">100%</p>
-            </div>
-            <div class="column">
-              <select>
-                <option v-for="country in covidCountries" v-bind:key="country.id" :value="country">{{ country }}</option>
-              </select>
+              <p class="has-text-danger">Reported Deaths</p>
+              <p class="stats has-text-danger">{{ deaths }}</p>
             </div>
           </div>
         </div>
@@ -86,7 +86,13 @@ export default {
   },
 
   computed: {
-    ...mapState(['covidCountries'])
+    ...mapState([
+      'covidCountries',
+      'confirmed',
+      'date',
+      'deaths',
+      'recovered'
+    ])
   },
 
   methods: {
@@ -106,6 +112,11 @@ body,
 html {
   height: 100%;
 }
+
+select {
+  margin: 0 0 30px;
+}
+
 .container {
   margin: 0 auto;
   display: flex;
@@ -161,7 +172,15 @@ html {
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    bottom: -50px;
+    bottom: 5px;
+  }
+
+  .column {
+    margin-left: 15px;
+  }
+
+  .columns .column:last-child {
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -179,5 +198,14 @@ html {
   width: 25px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.highlight {
+  background: #26344c;
+}
+
+.column {
+  border-radius: 10px;
+  padding-bottom: 50px;
 }
 </style>

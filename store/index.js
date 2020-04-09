@@ -1,6 +1,10 @@
 export const state = () => ({
   covidData: [],
-  covidCountries: null
+  covidCountries: null,
+  confirmed: null,
+  date: null,
+  recovered: null,
+  deaths: null
 });
 
 export const actions = {
@@ -9,20 +13,24 @@ export const actions = {
 
     if (data) {
       const covidCountries = Object.keys(data);
+      commit('setCovidData', data);
       commit('setCovidCountries', covidCountries);
     }
 
     /* eslint-disable */
-    console.log(JSON.stringify(data));
+    let confirmed = [],
+        date = [],
+        deaths = [],
+        recovered = [];
 
-    const countryList = Object.keys(data)
+    data['United Kingdom'].forEach((item, index) => {
+        confirmed.push(item['confirmed']);
+        deaths.push(item['deaths']);
+        recovered.push(item['recovered']);
+        date.push(item['recovered']);
+    });
 
-
-    console.log(countryList);
-
-
-
-    commit('setCovidData', data);
+    commit('setDefaultValues', { confirmed, date, deaths, recovered});
   }
 };
 
@@ -32,6 +40,17 @@ export const mutations = {
   },
 
   setCovidCountries: (state, data) => {
-      state.covidCountries = data;
+    state.covidCountries = data;
+  },
+
+  setDefaultValues: (state, data) => {
+      state.confirmed = data.confirmed[data.confirmed.length - 1];
+      state.date = data.date[data.date.length - 1];;
+      state.deaths = data.deaths[data.deaths.length - 1];;
+      state.recovered = data.recovered[data.recovered.length - 1];;
   }
+};
+
+export const getters = {
+  isUnitedKingdom: ({ covidData }) => covidData
 };
