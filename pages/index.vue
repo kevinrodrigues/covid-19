@@ -8,7 +8,7 @@
       </h1>
       <div class="container is-fullhd">
         <div class="visualizer-info">
-          <select>
+          <select @change="onCountrySelectionChange">
             <option v-for="country in covidCountries" v-bind:key="country.id" :value="country" :selected="country === 'United Kingdom'">
               {{ country }}
             </option>
@@ -97,7 +97,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'getCovidData'
+      'getCovidData',
+      'onCountrySelectionChange'
     ])
   }
 };
