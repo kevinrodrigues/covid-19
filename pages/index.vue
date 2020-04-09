@@ -6,7 +6,30 @@
         Covid-19 Visualizer
       </h1>
       <div class="container is-fullhd">
-        graph here.
+        <div class="visualizer-info">
+          <div class="columns">
+            <div class="column">
+              <TickIcon />
+              <p class="has-text-warning">Reported Infection Cases</p>
+              <p class="stats has-text-warning">100</p>
+            </div>
+            <div class="column">
+              <TickIcon />
+              <p class="has-text-success">No. of people Recovered</p>
+              <p class="stats has-text-success">100</p>
+            </div>
+            <div class="column">
+              <p class="has-text-danger">Death Rate %</p>
+              <p class="stats has-text-danger">100%</p>
+            </div>
+            <div class="column">
+              <select id="select" class="form-control basic">
+                <option value="one">one</option>
+                <option value="one">two</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
       <a href="https://github.com/kevinrodrigues" target="_blank" class="git button">
         <span class="icon is-small">
@@ -41,11 +64,13 @@
 <script>
 import VirusIcon from '~/components/VirusIcon.vue';
 import OctocatIcon from '~/components/GithubOctocat.vue';
+import TickIcon from '~/components/TickIcon.vue';
 
 export default {
   components: {
     VirusIcon,
-    OctocatIcon
+    OctocatIcon,
+    TickIcon
   }
 };
 </script>
@@ -89,6 +114,7 @@ html {
 
 .links {
   padding-top: 15px;
+  margin-top: 50px;
 }
 
 .links a:first-child {
@@ -99,6 +125,30 @@ html {
   position: absolute;
   top: 10px;
   right: 20px;
-  font-size: 10px;;
+  font-size: 10px;
+}
+
+.column {
+  position: relative;
+}
+
+@media (min-width: 48em) {
+  .stats {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: -50px;
+  }
+}
+
+.stats {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.visualizer-info {
+  color: #fff;
 }
 </style>
