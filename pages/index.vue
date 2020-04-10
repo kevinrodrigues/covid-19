@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div  v-if="hasLoaded" class="container">
     <div>
       <VirusIcon />
       <h1 class="title">
@@ -30,10 +30,37 @@
               <p class="stats has-text-danger">{{ deaths }}</p>
             </div>
           </div>
-
+          <p class="trend-title">General Trends</p>
           <div>
-            chart here
-            <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+            <p>Reported Infection Cases</p>
+            <div class="highlight">
+              <trend
+                :data="allConfirmed"
+                :gradient="['#ffdd57']"
+                auto-draw
+                smooth>
+              </trend>
+            </div>
+
+            <p>No. of people Recovered</p>
+            <div class="highlight">
+              <trend
+                :data="allRecovered"
+                :gradient="['#48c774']"
+                auto-draw
+                smooth>
+              </trend>
+            </div>
+
+            <p>Reported Deaths</p>
+            <div class="highlight">
+              <trend
+                :data="allDeaths"
+                :gradient="['#f14668']"
+                auto-draw
+                smooth>
+              </trend>
+            </div>
           </div>
         </div>
       </div>
@@ -87,24 +114,14 @@ export default {
     WorldIcon
   },
 
-  data: function() {
-      return {
-        chartOptions: {
-          chart: {
-            id: 'vuechart-example'
-          },
-          xaxis: {
-            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
-          }
-        },
-        series: [{
-          name: 'series-1',
-          data: [30, 40, 35, 50, 49, 60, 70, 91]
-        }]
-      }
-    },
+ data: function () {
+  return {
+   hasLoaded: false
+  }
+ },
 
   mounted () {
+    this.hasLoaded = true;
     this.getCovidData();
   },
 
@@ -113,8 +130,12 @@ export default {
       'covidCountries',
       'confirmed',
       'date',
+      'allDates',
       'deaths',
-      'recovered'
+      'allDeaths',
+      'recovered',
+      'allRecovered',
+      'allConfirmed'
     ])
   },
 
@@ -122,7 +143,12 @@ export default {
     ...mapActions([
       'getCovidData',
       'onCountrySelectionChange'
-    ])
+    ]),
+
+    updateChart() {
+      console.log(this.allDeaths);
+    
+    }
   }
 };
 </script>
@@ -136,6 +162,16 @@ html {
 
 select {
   margin: 0 0 30px;
+  height: auto;
+  border: 1px solid #090c1f;
+  color: #fff;
+  font-size: 15px;
+  padding: 8px 10px;
+  letter-spacing: 1px;
+  height: calc(1.4em + 1.4rem + 2px);
+  padding: .75rem 1.25rem;
+  border-radius: 6px;
+  background: #1b2e4b;
 }
 
 .container {
@@ -157,7 +193,12 @@ select {
   letter-spacing: 1px;
   margin-top: 10px;
 }
-
+.trend-title {
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 30px;
+  border-bottom: 1px dashed #4c526b;
+}
 .subtitle {
   font-weight: 300;
   font-size: 42px;
@@ -211,7 +252,11 @@ select {
 }
 
 .visualizer-info {
-  color: #fff;
+  color: #4c526b;
+}
+
+.visualizer-info .highlight {
+  margin-top: 10px;
 }
 
 .world {

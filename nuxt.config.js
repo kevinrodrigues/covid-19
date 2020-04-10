@@ -28,7 +28,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src : '~/plugins/vue-apexchart.js', ssr : false }
+    { src : '~/plugins/vue-trendChart.js', ssr : false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -59,7 +59,7 @@ export default {
   ** Build configuration
   */
   build: {
-    vendor : ['vue-apexchart'],
+    vendor : ['vue-trendChart'],
     postcss: {
       preset: {
         features: {

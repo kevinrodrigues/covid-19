@@ -2,9 +2,13 @@ export const state = () => ({
   covidData: null,
   covidCountries: null,
   confirmed: null,
+  allConfirmed: null,
   date: null,
   recovered: null,
-  deaths: null
+  deaths: null,
+  allDeaths: [],
+  allDates: null,
+  allRecovered: null
 });
 
 export const actions = {
@@ -61,12 +65,12 @@ export const mutations = {
 
   setCovidValues: (state, data) => {
     state.confirmed = data.confirmed[data.confirmed.length - 1];
+    state.allConfirmed = data.confirmed;
     state.date = data.date[data.date.length - 1];
+    state.allDates = data.date;
     state.deaths = data.deaths[data.deaths.length - 1];
+    state.allDeaths = data.deaths;
     state.recovered = data.recovered[data.recovered.length - 1];
+    state.allRecovered = data.recovered;
   }
-};
-
-export const getters = {
-  isUnitedKingdom: ({ covidData }) => covidData
 };

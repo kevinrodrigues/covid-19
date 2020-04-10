@@ -25,9 +25,9 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/bulma": "^1.2.1",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "apexcharts": "^3.18.1",
     "nuxt": "^2.0.0",
-    "vue-apexcharts": "^1.5.3"
+    "pure-vue-chart": "^0.3.4",
+    "vuetrend": "^0.3.4"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
