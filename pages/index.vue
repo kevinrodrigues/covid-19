@@ -30,6 +30,11 @@
               <p class="stats has-text-danger">{{ deaths }}</p>
             </div>
           </div>
+
+          <div>
+            chart here
+            <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+          </div>
         </div>
       </div>
       <a href="https://github.com/kevinrodrigues" target="_blank" class="git button">
@@ -63,6 +68,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import { mapActions, mapState } from 'vuex';
 import VirusIcon from '~/components/VirusIcon.vue';
 import OctocatIcon from '~/components/GithubOctocat.vue';
@@ -80,6 +86,23 @@ export default {
     AlertIcon,
     WorldIcon
   },
+
+  data: function() {
+      return {
+        chartOptions: {
+          chart: {
+            id: 'vuechart-example'
+          },
+          xaxis: {
+            categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+          }
+        },
+        series: [{
+          name: 'series-1',
+          data: [30, 40, 35, 50, 49, 60, 70, 91]
+        }]
+      }
+    },
 
   mounted () {
     this.getCovidData();
@@ -105,13 +128,10 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: #090c1f;
-}
-
 body,
 html {
   height: 100%;
+  background-color: #090c1f;
 }
 
 select {
