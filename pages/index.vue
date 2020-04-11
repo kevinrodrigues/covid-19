@@ -31,7 +31,7 @@
             </div>
           </div>
           <p class="trend-title">General Trends</p>
-          <div>
+          <div class="graphs">
             <p>Reported Infection Cases</p>
             <div class="highlight">
               <trend
@@ -258,7 +258,6 @@ select {
 .visualizer-info .highlight {
   margin-top: 10px;
   position: relative;
-  padding: 20px;
 }
 
 .value-1,
@@ -284,6 +283,10 @@ select {
   width: 25px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.graphs .highlight {
+  padding: 20px;
 }
 
 .highlight {

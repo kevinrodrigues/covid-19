@@ -13,7 +13,7 @@ export const state = () => ({
 
 export const actions = {
   async getCovidData ({ commit }, playload) {
-    const data = await this.$axios.$get('https://pomber.github.io/covid19/timeseries.json');
+    const data = await this.$axios.$get('https://pomber.github.io/covid19/timeseries.json', { crossdomain: true });
 
     if (data) {
       const covidCountries = Object.keys(data);
