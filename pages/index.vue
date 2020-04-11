@@ -18,16 +18,19 @@
               <WarningIcon />
               <p class="has-text-warning">Reported Infection Cases</p>
               <p class="stats has-text-warning">{{ confirmed }}</p>
+              <p class="daybefore stats has-text-warning">Day before: {{ dayBeforeConfirmed }}</p>
             </div>
             <div class="column highlight">
               <TickIcon />
               <p class="has-text-success">No. of people Recovered</p>
               <p class="stats has-text-success">{{ recovered }}</p>
+              <p class="daybefore stats has-text-success">Day before: {{ dayBeforeRecovered }}</p>
             </div>
             <div class="column highlight">
               <AlertIcon />
               <p class="has-text-danger">Reported Deaths</p>
               <p class="stats has-text-danger">{{ deaths }}</p>
+              <p class="daybefore stats has-text-danger">Day before: {{ dayBeforeDeaths }}</p>
             </div>
           </div>
           <p class="trend-title">General Trends</p>
@@ -129,13 +132,16 @@ export default {
     ...mapState([
       'covidCountries',
       'confirmed',
+      'allConfirmed',
+      'dayBeforeConfirmed',
       'date',
       'allDates',
       'deaths',
       'allDeaths',
+      'dayBeforeDeaths',
       'recovered',
       'allRecovered',
-      'allConfirmed'
+      'dayBeforeRecovered'
     ])
   },
 
@@ -234,11 +240,12 @@ select {
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    bottom: 5px;
+    bottom: 14px;
   }
 
   .column {
     margin-left: 15px;
+    padding-bottom: 20px;
   }
 
   .columns .column:last-child {
@@ -249,6 +256,11 @@ select {
 .stats {
   font-size: 30px;
   font-weight: 500;
+}
+
+.daybefore {
+  font-size: 11px;
+  bottom: 5px;
 }
 
 .visualizer-info {
