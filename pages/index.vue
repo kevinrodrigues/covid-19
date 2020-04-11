@@ -1,5 +1,5 @@
 <template>
-  <div  v-if="hasLoaded" class="container">
+  <div v-if="hasLoaded" class="container">
     <div>
       <VirusIcon />
       <h1 class="title">
@@ -9,7 +9,7 @@
       <div class="container is-fullhd">
         <div class="visualizer-info">
           <select @change="onCountrySelectionChange">
-            <option v-for="country in covidCountries" v-bind:key="country.id" :value="country" :selected="country === 'United Kingdom'">
+            <option v-for="country in covidCountries" :key="country.id" :value="country" :selected="country === 'United Kingdom'">
               {{ country }}
             </option>
           </select>
@@ -38,8 +38,10 @@
                 :data="allConfirmed"
                 :gradient="['#ffdd57']"
                 auto-draw
-                smooth>
-              </trend>
+                smooth
+              />
+              <p class="value-1">No. of cases</p>
+              <p class="value-2">Period: Jan 2020 - Current date</p>
             </div>
 
             <p>No. of people Recovered</p>
@@ -48,8 +50,10 @@
                 :data="allRecovered"
                 :gradient="['#48c774']"
                 auto-draw
-                smooth>
-              </trend>
+                smooth
+              />
+              <p class="value-1">No. of cases</p>
+              <p class="value-2">Period: Jan 2020 - Current date</p>
             </div>
 
             <p>Reported Deaths</p>
@@ -58,8 +62,10 @@
                 :data="allDeaths"
                 :gradient="['#f14668']"
                 auto-draw
-                smooth>
-              </trend>
+                smooth
+              />
+              <p class="value-1">No. of cases</p>
+              <p class="value-2">Period: Jan 2020 - Current date</p>
             </div>
           </div>
         </div>
@@ -95,7 +101,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import { mapActions, mapState } from 'vuex';
 import VirusIcon from '~/components/VirusIcon.vue';
 import OctocatIcon from '~/components/GithubOctocat.vue';
@@ -114,15 +119,10 @@ export default {
     WorldIcon
   },
 
- data: function () {
-  return {
-   hasLoaded: false
-  }
- },
-
-  mounted () {
-    this.hasLoaded = true;
-    this.getCovidData();
+  data () {
+    return {
+      hasLoaded: false
+    };
   },
 
   computed: {
@@ -139,16 +139,16 @@ export default {
     ])
   },
 
+  mounted () {
+    this.hasLoaded = true;
+    this.getCovidData();
+  },
+
   methods: {
     ...mapActions([
       'getCovidData',
       'onCountrySelectionChange'
-    ]),
-
-    updateChart() {
-      console.log(this.allDeaths);
-    
-    }
+    ])
   }
 };
 </script>
@@ -257,6 +257,26 @@ select {
 
 .visualizer-info .highlight {
   margin-top: 10px;
+  position: relative;
+  padding: 20px;
+}
+
+.value-1,
+.value-2 {
+  position: absolute;
+  font-size: 10px;
+  opacity: 0.5;
+  color: #fff;
+}
+
+.value-1 {
+  top: 5px;
+  left: 10px;
+}
+
+.value-2 {
+  bottom: 5px;
+  right: 10px;
 }
 
 .world {

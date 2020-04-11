@@ -2,13 +2,13 @@ export const state = () => ({
   covidData: null,
   covidCountries: null,
   confirmed: null,
-  allConfirmed: null,
+  allConfirmed: [],
   date: null,
   recovered: null,
   deaths: null,
   allDeaths: [],
-  allDates: null,
-  allRecovered: null
+  allDates: [],
+  allRecovered: []
 });
 
 export const actions = {
