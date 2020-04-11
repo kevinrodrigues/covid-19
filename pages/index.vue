@@ -4,7 +4,7 @@
       <VirusIcon />
       <h1 class="title">
         <WorldIcon class="world" />
-        Covid-19 Is Real
+        COVID-19
       </h1>
       <div class="container is-fullhd">
         <div class="visualizer-info">
