@@ -13,14 +13,10 @@ export const state = () => ({
 
 export const actions = {
   async getCovidData ({ commit }) {
-    /* eslint-disable */ 
-
-    let response = await fetch(
-        "https://pomber.github.io/covid19/timeseries.json"
+    const response = await fetch(
+      'https://pomber.github.io/covid19/timeseries.json'
     );
-    let data = await response.json();
-
-    console.log(data);
+    const data = await response.json();
 
     if (data) {
       const covidCountries = Object.keys(data);
